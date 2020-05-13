@@ -1,0 +1,24 @@
+api_platform:
+  # The title of the API.
+  title: 'API Farmer'
+  # The version of the API.
+  version: '0.0.1'
+  mapping:
+    paths: ['%kernel.project_dir%/src/Entity']
+  patch_formats:
+    json: ['application/merge-patch+json']
+  swagger:
+    versions: [3]
+    api_keys:
+      apiToken:
+        name: Authorization
+        type: header
+  http_cache:
+    max_age: 0
+    shared_max_age: 3600
+    vary: ['Content-Type', 'Authorization', 'Origin']
+    public: true
+  collection:
+    pagination:
+      items_per_page: 30
+

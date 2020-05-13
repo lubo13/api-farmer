@@ -1,0 +1,69 @@
+{# a *-to-many collection of values #}
+{% if value is iterable %}
+    <table class="table">
+        <thead>
+        <tr>
+            <td>
+                {{ 'asset_number'|trans }}
+            </td>
+            <td>
+                {{ 'asset_decares'|trans }}
+            </td>
+            <td>
+                {{ 'owner'|trans }}
+            </td>
+            <td>
+                {{ 'owner_of_decares'|trans }}
+            </td>
+            <td>
+                {{ 'owner_rent'|trans }}
+            </td>
+            <td>
+                {{ 'total_rent'|trans }}
+            </td>
+        </tr>
+        </thead>
+        <tbody>
+        {% set rentForAsset = 0 %}
+        {% set onRent = 0 %}
+        {% for contractRentAsset in item.contractRentAssets %}
+            <tr>
+                <td>
+                    {{ contractRentAsset.asset.identificationNumber }}
+                </td>
+                <td>
+                    {{ contractRentAsset.assetRentPercent / 100 * contractRentAsset.asset.areaInDecares }}
+                </td>
+                <td>
+                    {{ contractRentAsset.landlord.name ~ ' ' ~ contractRentAsset.landlord.family }}
+                </td>
+                <td>
+                    {{ contractRentAsset.asset.areaInDecares }}
+                </td>
+                <td>
+                    {{ contractRentAsset.assetRentPercent / 100 * contractRentAsset.asset.areaInDecares * item.rentPerDecare }}
+                </td>
+                <td>
+                    {% set onRent = onRent + contractRentAsset.assetRentPercent / 100 * contractRentAsset.asset.areaInDecares  %}
+                    {% set rentForAsset = rentForAsset + contractRentAsset.assetRentPercent / 100 * contractRentAsset.asset.areaInDecares * item.rentPerDecare  %}
+                </td>
+            </tr>
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td>{{ 'on_rent'|trans ~ ' ' ~ onRent }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>
+                {{ rentForAsset }}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    {# a simple *-to-one value associated with an entity managed by this backend #}
+{% elseif link_parameters is defined %}
+    <a href="{{ path('easyadmin', link_parameters|merge({ referer: '' })) }}">{{ value|easyadmin_truncate }}</a>
+{% else %}
+    {{ value|easyadmin_truncate }}
+{% endif %}

@@ -1,0 +1,35 @@
+easy_admin:
+  site_name: 'Farmer'
+  design:
+    menu:
+      - { entity: 'User', permission: 'ROLE_USER'}
+      - { entity: 'ContractAsset', permission: 'ROLE_USER'}
+      - { entity: 'ContractRent', permission: 'ROLE_USER'}
+  entities:
+    User:
+      class: App\Entity\User
+      disabled_actions: ['new', 'search', 'edit', 'delete']
+    ContractAsset:
+      class: App\Entity\ContractAsset
+      controller: App\Controller\ContractAssetAdminController
+      disabled_actions: ['new', 'search', 'edit', 'delete']
+      list:
+        fields: ['contractNumber', 'startDate', 'sumDecares', 'price', 'decarePrice']
+        filters: ['contractNumber', {property: 'assets', label: 'asset_identification_number'}, 'endDate']
+    ContractRent:
+      class: App\Entity\ContractRent
+      controller: App\Controller\ContractRentAdminController
+      disabled_actions: ['new', 'search', 'edit', 'delete']
+      list:
+        fields:
+          - { property: 'contractNumber' }
+          - { property: 'startDate' }
+          - { property: 'endDate' }
+          - { property: 'contractRentAssets', template: 'field/contract_rent_assets.html.twig' }
+        filters:
+          - 'contractNumber'
+          - {property: 'asset_identification_number', label: 'asset_identification_number', type: App\Form\Filter\AssetIdentificationNumberFilterType, mapped: false}
+          - {property: 'name', label: 'landlord_name', type: App\Form\Filter\LandlordFilterType, mapped: false}
+          - {property: 'family', label: 'landlord_family', type: App\Form\Filter\LandlordFilterType, mapped: false}
+          - {property: 'identificationNumber', label: 'landlord_identification_number', type: App\Form\Filter\LandlordFilterType, mapped: false}
+          - 'endDate'
