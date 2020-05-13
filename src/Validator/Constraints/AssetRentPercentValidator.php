@@ -46,7 +46,7 @@ class AssetRentPercentValidator extends ConstraintValidator
     {
         $sum = $contractRentAsset->getAssetRentPercent();
         foreach ($contracts as $contract) {
-            if ($contract->getContractRent()) {
+            if ($contract->getContractRent() && $contract->getContractRent()->getId() !== $contractRentAsset->getContractRent()->getId()) {
                 $sum += $contract->getAssetRentPercent();
             }
         }

@@ -35,7 +35,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     )
  * @UniqueEntity("identificationNumber")
  */
-class Landlord implements CustomUserInterface
+class Landlord
 {
     use TimestampableTrait;
 

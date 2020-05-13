@@ -39,7 +39,7 @@ use Symfony\Component\Serializer\Annotation\MaxDepth;
  *     )
  * @UniqueEntity("identificationNumber")
  */
-class Asset implements CustomUserInterface
+class Asset
 {
     use TimestampableTrait;
 

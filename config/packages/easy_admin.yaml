@@ -15,7 +15,7 @@ easy_admin:
       disabled_actions: ['new', 'search', 'edit', 'delete']
       list:
         fields: ['contractNumber', 'startDate', 'sumDecares', 'price', 'decarePrice']
-        filters: ['contractNumber', {property: 'assets', label: 'asset_identification_number'}, 'endDate']
+        filters: ['contractNumber', {property: 'assets', label: 'asset_identification_number'}, 'startDate']
     ContractRent:
       class: App\Entity\ContractRent
       controller: App\Controller\ContractRentAdminController
