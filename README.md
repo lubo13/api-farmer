@@ -67,7 +67,7 @@
 4. След като създадете Аренодатели, Имоти и Договори се върнете в акаунта на фермера. Там ще откриете grid таблиците с вече създадената от вас информация (админ - grid таблиците не черпят информация чрез API пойнтовете)
 
 ## Installation
-1. git clone git@bitbucket.org:Lubo13/api-farmer.git
+1. git clone git@github.com:lubo13/api-farmer.git
 2. cd api-farmer
 3. composer install
 4. edit .env file and change DATABASE_URL with your respective settings
